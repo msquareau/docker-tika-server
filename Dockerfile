@@ -1,8 +1,9 @@
-FROM ubuntu:latest
-MAINTAINER david@logicalspark.com
+FROM azul/zulu-openjdk-debian:8
+MAINTAINER matthias.matook@m-square.com.au
 
 ENV TIKA_VERSION 1.18
 ENV TIKA_SERVER_URL https://www.apache.org/dist/tika/tika-server-$TIKA_VERSION.jar
+ENV JVM_OPTIONS "-server -Xms512m -Xmx512m -XX:+UseG1GC"
 
 RUN	apt-get update \
 	&& apt-get install openjdk-8-jre-headless curl gdal-bin tesseract-ocr \
@@ -18,4 +19,4 @@ RUN	apt-get update \
 	&& apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 9998
-ENTRYPOINT java -jar /tika-server-${TIKA_VERSION}.jar -h 0.0.0.0
+ENTRYPOINT java ${JVM_OPTIONS} -jar /tika/tika-server-${TIKA_VERSION}.jar -h 0.0.0.0
