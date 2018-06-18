@@ -19,4 +19,4 @@ RUN	apt-get update \
 	&& apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 9998
-ENTRYPOINT java ${JVM_OPTIONS} -jar /tika/tika-server-${TIKA_VERSION}.jar -h 0.0.0.0
+ENTRYPOINT java ${JVM_OPTIONS} -jar /tika-server-${TIKA_VERSION}.jar -h 0.0.0.0
